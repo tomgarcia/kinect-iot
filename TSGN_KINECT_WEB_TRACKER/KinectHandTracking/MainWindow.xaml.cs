@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,7 @@ namespace KinectHandTracking
 
         // Tells if the Current Command has been written to or not.
         static bool command = false;
+        static string sendCmd = "";
 
         static bool readyForCmd = true;
 
@@ -233,6 +235,7 @@ namespace KinectHandTracking
                                 // Command Handling Code
 
                                 string cmdChar = "";
+                                
 
                                 // Frees the user to make a new command every 1.5 seconds.
                                 if (!readyForCmd && (stopwatch.Elapsed.TotalMilliseconds > 1500))
@@ -269,11 +272,13 @@ namespace KinectHandTracking
                                         if (!command)
                                         {
                                             tblCommand.Text = cmdChar;
+                                            sendCmd = cmdChar;
                                             command = true;
                                         }
                                         else
                                         {
                                             tblCommand.Text += (" " + cmdChar);
+                                            sendCmd += cmdChar;
                                         }
                                     }
                                 }
@@ -283,12 +288,28 @@ namespace KinectHandTracking
                                     command = false;
                                     tblLastCommand.Text = tblCommand.Text;
                                     tblCommand.Text = "-";
-
+                                    
                                     stopwatch.Start();
                                     readyForCmd = false;
 
                                     // Send command combo to web server here (use tblLastCommand.Text)
-                                        
+                                    var request = (HttpWebRequest)WebRequest.Create("http://192.168.43.139:3000/kinect?q=" + sendCmd);
+
+                                    var postData = sendCmd;
+                                    var data = Encoding.ASCII.GetBytes(postData);
+
+                                    request.Method = "POST";
+                                    request.ContentType = "application/x-www-form-urlencoded";
+                                    request.ContentLength = data.Length;
+
+                                    using (var stream = request.GetRequestStream())
+                                    {
+                                        stream.Write(data, 0, data.Length);
+                                    }
+
+                                    var response = (HttpWebResponse)request.GetResponse();
+
+                                    sendCmd = "";
                                 }
                             }
                         }
