@@ -12,11 +12,11 @@ var db = mysql.createConnection({
 db.connect();
 
 /* POST data from Kinect. */
-router.post('/', function(req, res, next) {
-    db.query("INSERT INTO data SET ?", {str: req.query.q}, function (err) {
+router.get('/', function(req, res, next) {
+    db.query("SELECT str, time FROM data ORDER BY time DESC", function (err, results) {
         console.log(err);
+        res.send(results);
     });
-    res.send("ACK");
 });
 
 module.exports = router;
