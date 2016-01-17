@@ -1,16 +1,16 @@
 <html>
-    <title>Aloha Snackbar</title>
-        <meta charset="windows-1252">
+    <title>Gesture Controls</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/stylesheets/HomePageRules.css" rel="stylesheet">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+        </script>
+        <script type="text/javascript" src="/javascripts/fillTable.js"></script>
 </head>
         <div>
             <p>Gestures</p>
         </div>
 <div>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-    </script>
-    <table style="width: 100%">
+    <table>
         <tr>
         <td>Wave <div><img src="/images/wave.gif"></div></td>
         <td>Opening Hand<div><img src="/images/open hand.jpg"></div></td>
@@ -27,14 +27,5 @@
         </tr>
     </table>
 </div>
-<script>
-    $(document).ready(
-   (function poll(){
-    $.ajax({ url: "http://131.179.50.179:3000/data", success: function(){
-        //Update your dashboard gauge
-        console.log("yes");
-    }, dataType: "json", complete: poll});
-})());
-</script>
     </body>
 </html>
