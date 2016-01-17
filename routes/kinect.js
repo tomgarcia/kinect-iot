@@ -1,5 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var exec = require('child_process').exec;
+
+var actions = {
+}
+
+var prev_command = false;
 
 var mysql = require('mysql');
 var db = mysql.createConnection({
@@ -16,6 +22,7 @@ router.post('/', function(req, res, next) {
     db.query("INSERT INTO data SET ?", {str: req.query.q}, function (err) {
         console.log(err);
     });
+    exec(actions[req.query.q], {cwd: 'utilities'});
     res.send("ACK");
 });
 

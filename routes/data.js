@@ -11,7 +11,7 @@ var db = mysql.createConnection({
 });
 db.connect();
 
-/* POST data from Kinect. */
+/* GET data from database. */
 router.get('/', function(req, res, next) {
     db.query("SELECT str, time FROM data ORDER BY time DESC", function (err, results) {
         console.log(err);
