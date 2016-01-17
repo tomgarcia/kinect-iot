@@ -1,30 +1,36 @@
-html{
+html {
     overflow: hidden;
     background-color: cornflowerblue;
 }
-body{
+
+body {
     padding: 0;
     margin: 0;
 }
-h1{
+
+h1 {
     font-family: Veranda;
     font-size: 36px;
     color: darkgoldenrod;
     z-index: 3;
 }
-p {font-family: Veranda;
-font-size: 48px;
-text-decoration-color: white;
-text-align:center;
-font-weight: bold;
-margin: 0;
-padding-bottom: 3%;
+
+p {
+    font-family: Veranda;
+    font-size: 48px;
+    text-decoration-color: white;
+    text-align:center;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 3%;
 }
-table{
-    
+
+table {
     box-sizing: border-box;
+    width: 100%;
 }
-tr, td{
+
+tr, td {
     text-align: center;
     font-size: 20px;
     margin: 0;
@@ -33,6 +39,17 @@ tr, td{
     outline-color: white;
     border-collapse: collapse;
 }
-img{
-    
+
+td, p {
+   color: whitesmoke;
+} 
+
+img {
+    width: 20%;
+    height: 20%;
+}
+
+img.large {
+    width: 35%;
+    height: 35%;
 }
